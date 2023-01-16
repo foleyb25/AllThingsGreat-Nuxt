@@ -7,9 +7,12 @@
       <Style type="text/css" children=""></Style>
     </Head>
     <NuxtLayout>
-      <NuxtPage class="h-screen flex flex-col justify-center items-center"/>
+      <main class="main-content relative overflow-hidden rounded w-[90%] mt-[60px] pb-4 pt-4 bg-primary-dark flex flex-row justify-center">
+        <img src="./assets/images/waves.svg" class="w-full absolute h-[649px]  left-0 overflow-hidden" alt="">
+        <NavigationTopicsComponent class="h-full w-[27%] mr-4 shadow-2xl z-[1] rounded bg-white"/>
+        <NuxtPage class="h-screen rounded z-[1] w-[67%] bg-white"/>
+      </main>
     </NuxtLayout>
-    
   </div>
 </template>
 
@@ -50,4 +53,19 @@ Configure the style naming inside of nuxt.config.ts
   opacity: 0;
   filter: blur(1rem);
 }
+
+p {
+      color: black !important
+    }
+   .fade-enter-active, .fade-leave-active {
+      transition-duration: .25s;
+   }
+   .fade-enter-from, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      transform: translate(0, 100px);
+      transition-duration: .25s;
+   }
+
+   .main-content {
+    font-family: 'Futura';
+   }
 </style>

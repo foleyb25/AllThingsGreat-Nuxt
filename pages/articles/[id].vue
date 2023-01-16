@@ -10,7 +10,7 @@ const {id} = useRoute().params
 
 
 definePageMeta({
-  middleware: ["auth"],
+  // middleware: ["auth"],
   // or middleware: 'auth'
 
   //   layout: "customLayout",   define custom layout and use follwoing tage <NuxtLayout name="customLayout">

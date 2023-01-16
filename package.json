@@ -13,6 +13,11 @@
     "nuxt": "3.0.0"
   },
   "dependencies": {
-    "@nuxtjs/tailwindcss": "^6.2.0"
+    "@auth0/auth0-spa-js": "^2.0.1",
+    "@nuxtjs/tailwindcss": "^6.2.0",
+    "axios": "^1.2.2",
+    "cheerio": "^1.0.0-rc.12",
+    "compressorjs": "^1.1.1",
+    "flowbite": "^1.6.1"
   }
 }
