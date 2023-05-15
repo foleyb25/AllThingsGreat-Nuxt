@@ -10,10 +10,14 @@ module.exports = {
     "./error.vue"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'vcr': ['vcr', 'sans-serif'],
+      }
+    },
+    
   },
   plugins: [
-    require('flowbite/plugin'),
     require("@tailwindcss/line-clamp")
   ],
 }

@@ -2,6 +2,6 @@
     <div>
       <NavigationHeaderComponent />
       <slot/>
-      <NavigationFooterComponent />
+      <NavigationFooterComponent class="hidden sm:flex" />
     </div>
   </template>
