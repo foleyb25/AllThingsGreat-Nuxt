@@ -55,8 +55,7 @@
 				<div
 					v-if="props.article.moods?.length > 0"
 					:class="
-						'm-2 inline-block p-1 border border-black rounded ' +
-						getMoodColor(props.article.moods[0])
+						'm-2 inline-block p-1 border border-black rounded bg-[#00ffff]'
 					"
 				>
 					{{ props.article.moods[0] }}

@@ -41,8 +41,8 @@
     <div>Smut:</div>
   </header>
   <div class="relative">
-    <img :src="getArticle.imageUrl" alt="Blog image" class="w-full aspect-[3/2] object-cover" />
-    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <img :src="getArticle.imageUrl" alt="Blog image" class="rounded-xl w-full aspect-[3/2] object-cover" />
+    <div class="rounded-xl absolute inset-0 bg-black bg-opacity-60"></div>
     <h1 class="absolute inset-0 flex items-center justify-center text-white text-2xl p-5">
         <div id="typedtext" class="bg-black bg-opacity-40 text-white"  style="font-family: 'vcr'" v-html="typedText"></div>
 </h1>
