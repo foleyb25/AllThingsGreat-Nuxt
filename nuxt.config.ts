@@ -3,6 +3,7 @@
 // NOTE: scss styling overrides tailwind styling
 
 export default defineNuxtConfig({
+
   // You can also import tailwind with modules and @nuxtjs/tailwindcss dev dependency
   modules: [
     '@nuxt/content',
@@ -10,6 +11,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     // '@vite-pwa/nuxt'
   ],
+
   // pwa: {
   //   // manifest: {
   //   //   name: 'All Things Great',
@@ -91,7 +93,7 @@ export default defineNuxtConfig({
   //To expose variables to browser put keys inside of public
   runtimeConfig: {
     public: {
-      NUXT_API_SERVER_URL: (process.env.NUXT_ENV === 'development') ? "http://localhost:8080/api/v2" : "https://allthingsgreatapi.com/api/v2",
+      apiBase: (process.env.NUXT_ENV === 'development') ? "http://localhost:8080/api/v2" : "https://allthingsgreatapi.com/api/v2",
     }
   }
 })

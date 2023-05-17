@@ -3,8 +3,9 @@ import { defineStore } from 'pinia'
 
 export const useArticleStore = defineStore('articleStore', {
     state: () => ({
-      allArticles: null,
+      allArticles: [],
       article: null,
+      pageNumber: 0,
     }),
 
     getters: {
@@ -18,20 +19,29 @@ export const useArticleStore = defineStore('articleStore', {
     },
 
     actions: {
-      async retrieveAllArticles() {
-        const {NUXT_API_SERVER_URL} = useRuntimeConfig()
-        const data = await useFetch(`${NUXT_API_SERVER_URL}/articles/`);
+      async retrieveArticles(category) {
+        const {apiBase} = useRuntimeConfig()
+        const data = await useFetch(`${apiBase}/articles/category/${category}/page/${this.pageNumber}`);
+        this.pageNumber = this.pageNumber++
         if (data.data) {
-            this.allArticles = data.data.value.data;
+            this.allArticles.push(...data.data.value.data)
         }
       },
 
       async retrieveSingleArticle(slug) {
-        const {NUXT_API_SERVER_URL} = useRuntimeConfig()
-        const data = await useFetch(`${NUXT_API_SERVER_URL}/articles/slug/${slug}`);
+        const {apiBase} = useRuntimeConfig()
+        const data = await useFetch(`${apiBase}/articles/slug/${slug}`);
         if (data.data) {
             this.article = data.data.value.data;
         }
+      },
+
+      async resetPageNumber() {
+        this.pageNumber = 0
+      },
+
+      async resetArticleList() {
+        this.allArticles = []
       }
     }
   })

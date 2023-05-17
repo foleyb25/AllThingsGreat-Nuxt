@@ -5,32 +5,37 @@
          <ul class="space-y-2">
             <li>
              <div class="cursor-pointer">
-               <NuxtLink to="/articles/great">All Things Great</NuxtLink>
+               <NuxtLink :to="{ path: '/category/allthingsgreat' }">All Things Great</NuxtLink>
              </div>
            </li>
            <li>
              <div class="cursor-pointer">
-               <NuxtLink to="/articles/great">Combat Sports</NuxtLink>
+               <NuxtLink :to="{ path: '/category/combatsports' }">Combat Sports</NuxtLink>
              </div>
            </li>
            <li>
              <div class="cursor-pointer">
-               <NuxtLink to="/articles/great">Cryptocurrency</NuxtLink>
+               <NuxtLink :to="{ path: '/category/cryptocurrency' }">Cryptocurrency</NuxtLink>
              </div>
            </li>
            <li>
              <div class="cursor-pointer">
-               <NuxtLink to="/articles/great">Technology and A.I.</NuxtLink>
+               <NuxtLink :to="{ path: '/category/ait' }">Technology and A.I.</NuxtLink>
              </div>
            </li>
            <li>
              <div class="cursor-pointer">
-               <NuxtLink to="/articles/great">History</NuxtLink>
+               <NuxtLink :to="{ path: '/category/healthandfitness' }">Health and Fitness</NuxtLink>
              </div>
            </li>
            <li>
              <div class="cursor-pointer">
-               <NuxtLink to="/articles/great">Matchup Analysis</NuxtLink>
+               <NuxtLink :to="{ path: '/category/extraordinary' }">Extraordinary</NuxtLink>
+             </div>
+           </li>
+           <li>
+             <div class="cursor-pointer">
+               <NuxtLink :to="{ path: '/category/matchupanalysis' }">Matchup Analysis</NuxtLink>
              </div>
            </li>
            
