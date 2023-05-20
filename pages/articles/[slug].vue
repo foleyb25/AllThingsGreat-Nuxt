@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-4">
 
     <!-- Back Button -->
     <button class="sticky top-2 left-2 bg-black bg-opacity-50 text-white p-2 rounded-full z-50" @click="goBack">
@@ -115,7 +115,6 @@ const goBack = () => {
   router.back();
 };
 
-let cursor = ref('_');  // underscore initially
 let typedText = ref(''); // This will hold the text that's displayed in the template.
 let aText = ref([getArticle.value.title]) // The lines of text to display.
 let iIndex = ref(0); // The current index in aText.
@@ -148,6 +147,7 @@ function typewriter() {
       setTimeout(typewriter, 500);
     }
   } else {
+    console.log("IS THIS INFINITE?")
     setTimeout(typewriter, iSpeed.value);
   }
 }

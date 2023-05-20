@@ -8,12 +8,17 @@
       <Meta name="description" :content="title" />
       <Style type="text/css" children=""></Style>
     </Head>
-    <NuxtLayout>
+    <NuxtLayout v-slot:default="{ routeCategory }">
       <main
         class="main-content relative overflow-hidden rounded w-full mt-[60px] pb-[100px] pt-4 bg-primary-dark flex flex-row justify-center">
         <img src="./assets/images/waves.svg" class="w-full absolute h-[649px]  left-0 overflow-hidden" alt="">
-        <NavigationTopicsComponent class="h-full w-[27%] mr-4 shadow-2xl z-[1] rounded bg-white hidden sm:block" />
-        <NuxtPage class="h-screen relative rounded p-4 z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll" />
+        <div class="relative h-full w-[27%] mr-4 shadow-2xl z-[1] rounded bg-white overflow-hidden hidden sm:block">
+          <NavigationArticleTopicsComponent v-if="routeCategory === 'category' || routeCategory === 'articles'" class=" w-full h-full " />
+          <NavigationAboutTopicsComponent v-if="routeCategory === 'about'" class=" w-full h-full" />
+        </div>
+        <div ref="scrollContainer" @scroll="handleScroll" class="h-screen relative rounded z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll">
+        <NuxtPage class="w-full h-full" />
+        </div>
       </main>
 
     </NuxtLayout>
@@ -33,6 +38,27 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+
+import { useAppStateStore } from '@/stores/appstate.store'
+
+ const { setNuxtPageScrollPosition } = useAppStateStore()
+
+const scrollContainer = ref(null)
+
+const handleScroll = () => {
+  setNuxtPageScrollPosition(scrollContainer.value.scrollTop)
+}
+
+onMounted(() => {
+  nextTick(() => {
+      scrollContainer.value.addEventListener('scroll', handleScroll)
+  })
+})
+
+onUnmounted(() => {
+    scrollContainer.value.removeEventListener('scroll', handleScroll)
+})
 
 const title = ref("Nuxt Template")
 
@@ -60,6 +86,22 @@ useHead({
 Configure the style naming inside of nuxt.config.ts
 */
 
+.move-enter-active,
+.move-leave-active {
+  transition: transform 1s ease;
+}
+
+.move-enter,
+.move-leave-to {
+  transform: translateX(-100%);
+}
+
+.move-enter-to,
+.move-leave {
+  transform: translateX(0);
+}
+
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;
@@ -69,10 +111,6 @@ Configure the style naming inside of nuxt.config.ts
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
-}
-
-p {
-  color: black !important
 }
 
 .fade-enter-active,

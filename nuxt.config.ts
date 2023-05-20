@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
+    '@vueuse/nuxt',
     // '@vite-pwa/nuxt'
   ],
 

@@ -1,5 +1,5 @@
 <template>
-    <div class=" max-h-screen bg-gray-50 overflow-scroll shadow-2xl">
+    <div class="p-4 max-h-screen bg-gray-50 overflow-scroll shadow-2xl">
         <div class="grid gap-4 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             <transition-group :css="false" @enter="onEnter">
                 <div v-for="(article, index) in getAllArticles" :key="article._id" :data-index="index">
