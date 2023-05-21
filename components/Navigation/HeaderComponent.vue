@@ -15,6 +15,9 @@
           <li><button  @click="toggleMenu" class="sm:hidden text-black hover:text-white"><font-awesome-icon :icon="['fas', 'bars']" size="2x"/></button></li>
         </ul>
       </nav>
+      <ul id="navLinks" class="flex flex-row justify-center items-center hidden sm:flex">
+          <NavigationLinksComponent/>
+      </ul>
     </header>
   </template>
 
@@ -24,3 +27,9 @@ const props = defineProps( [
 ])
 
 </script>
+
+<style>
+#navLinks > * {
+  margin-left: 4vw;
+}
+</style>

@@ -1,19 +1,20 @@
 <template>
 	<div
-		class="aspect-[14/15] bg-white shadow-xl xs:text-lg sm:text-sm md:text-md lg:text-lg rounded border border-black"
-	>
+		class="aspect-[14/15] bg-white shadow-xl xs:text-lg sm:text-xs md:text-sm lg:text-sm xl:text-base rounded border border-black">
 		<div class="h-[62%] w-full relative overflow-hidden">
-			<img
-				class="h-full w-full object-cover rounded-t"
-				:src="props.article.imageUrl"
-				alt=""
-			/>
+			<img class="h-full w-full object-cover rounded-t" :src="props.article.imageUrl" alt="" />
 		</div>
-		<div class="p-3 h-[70%]">
-			<div class="h-[50%] break-words line-clamp-3 font-semibold p-1">
+		<div class="p-1 h-[80%]">
+			<div class="h-[45%] break-words line-clamp-3 font-semibold p-1">
 				{{ props.article.title }}
 			</div>
-			<div class="flex items-center font-light h-[10%]">
+			<div class="mt-1 w-full bg-gradient-to-r rounded from-[#007FFF] to-[#FF073A] relative text-center"> Smut {{
+				props.article.evaluation.smut }}/10
+				<div class="absolute top-0 bg-black bg-opacity-30 h-full w-2 rounded"
+					:style="{ left: (props.article.evaluation.smut) * 10 + '%' }">
+				</div>
+			</div>
+			<!-- <div class="flex items-center font-light h-[10%]">
 				{{ props.article.numberOfRatings }}
 				Ratings
 				<svg
@@ -40,37 +41,18 @@
 							: "Not Yet Rated"
 					}}
 				</p>
-				<!-- <span
-					class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"
-				></span> -->
-				<!-- <a
-					href="#"
-					class="font-medium text-gray-900 underline hover:no-underline dark:text-white"
-					>{{ props.numcomments }} comments</a
-				> -->
-			</div>
-			<div class="h-[20%]">
-				<div></div>
-				{{ props.article.category }}
-				<div
-					v-if="props.article.moods?.length > 0"
-					:class="
-						'm-2 inline-block p-1 border border-black rounded bg-[#00ffff]'
-					"
-				>
-					{{ props.article.moods[0] }}
+			</div> -->
+			<div class="h-[20%] flex flex-row mt-1">
+				<div class="flex items-center">{{ props.article.category }}</div>
+				<div v-if="props.article.moods?.length > 0" class="flex items-center justify-center">
+					<p class="m-2 p-1 border border-black rounded bg-[#00ffff]">{{ props.article.moods[0] }}</p>
 				</div>
 			</div>
 			<div class="flex flex-row justify-start items-center">
-				<div
-					class="w-[15%] mt-2 rounded-full border-2 border-gray-300 mb-2 overflow-hidden"
-				>
+				<div class="w-[15%] rounded-full border-2 border-gray-300 mb-2 overflow-hidden">
 					<div class="relative aspect-square">
-						<img
-							class="bg-cover w-full h-full object-cover"
-							:src="props.article.writer.profileImageUrl"
-							alt=""
-						/>
+						<img class="bg-cover w-full h-full object-cover" :src="props.article.writer.profileImageUrl"
+							alt="" />
 					</div>
 				</div>
 				<div class="h-[10%] ml-2">{{ props.article.writer.nickName }}</div>

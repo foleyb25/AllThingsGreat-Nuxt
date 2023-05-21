@@ -11,18 +11,18 @@
     <div class="relative">
       <header class="grid grid-cols-2 gap-5 border-b border-black">
         <div class="flex items-center text-md sm:text-md md:text-lg lg:text-xl xl:text-xl">
-          <img :src="getArticle.writer.profileImageUrl" alt="Author's Avatar" class="w-20 h-20 rounded-full mr-2" />
+          <img :src="getArticle?.writer.profileImageUrl" alt="Author's Avatar" class="w-20 h-20 rounded-full mr-2" />
           <h4 class="font-bold">{{ getArticle.writer.nickName }}</h4>
         </div>
 
         <div class="flex flex-col md:flex-row lg:justify-between text-xs sm:text-sm md:text-xs lg:text-lg xl:text-xl">
           <div class="flex flex-col md:flex-row lg:flex-col lg:mb-4">
-            <div class="m-2"><strong>Published:</strong> <i class="text-gray-800">{{ formatDate(getArticle.createdAt) }}</i></div>
+            <div class="m-2"><strong>Published:</strong> <i class="text-gray-800">{{ formatDate(getArticle?.createdAt) }}</i></div>
             <div class="m-2"><strong>Updated:</strong> <i class="text-gray-800">{{
-              formatDate(getArticle.updatedAt) }}</i></div>
+              formatDate(getArticle?.updatedAt) }}</i></div>
           </div>
 
-          <p class="m-2"><strong>Read Time:</strong> <i class="text-gray-800"> {{ getArticle.estimatedReadTime }}
+          <p class="m-2"><strong>Read Time:</strong> <i class="text-gray-800"> {{ getArticle?.estimatedReadTime }}
             minutes</i></p>
         </div>
 
@@ -38,7 +38,7 @@
       </header>
       <header class="grid grid-cols-3 gap-5 border-b border-black text-xs sm:text-xs md:text-sm lg:text-xl xl:text-xl">
         <div class="flex items-center justify-center">
-          Content: {{ getArticle.evaluation.content }}/5
+          Content: {{ getArticle?.evaluation.content }}/5
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffff00" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-4 h-4 lg:w-6 lg:h-6">
@@ -48,7 +48,7 @@
           </span>
         </div>
         <div class="flex items-center justify-center">
-          Structure: {{ getArticle.evaluation.structure }}/5
+          Structure: {{ getArticle?.evaluation.structure }}/5
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffff00" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-4 h-4 lg:w-6 lg:h-6">
@@ -58,7 +58,7 @@
           </span>
         </div>
         <div class="flex items-center justify-center">
-          Organization: {{ getArticle.evaluation.organization }}/5
+          Organization: {{ getArticle?.evaluation.organization }}/5
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffff00" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-4 h-4 lg:w-6 lg:h-6">
@@ -71,64 +71,78 @@
       <header class="flex flex-row justify-center mt-4">
         <div class="w-full bg-gradient-to-r rounded from-[#007FFF] to-[#FF073A] relative text-center"> Smut
           <div class="absolute top-0 mt-5 bg-black bg-opacity-75 h-full w-2 rounded"
-            :style="{ left: (getArticle.evaluation.smut) * 10 + '%' }">
+            :style="{ left: (getArticle?.evaluation.smut) * 10 + '%' }">
             <div class="mt-5 flex justify-center">{{ getArticle.evaluation.smut }}/10</div>
           </div>
         </div>
       </header>
-      <div class="relative mt-12">
-        <img :src="getArticle.imageUrl" alt="Blog image" class="rounded-xl w-full aspect-[3/2] object-cover" />
+      <div ref="target" class="relative mt-12">
+        <img :src="getArticle?.imageUrl" alt="Blog image" class="rounded-xl w-full aspect-[3/2] object-cover" />
         <div class="rounded-xl absolute inset-0 bg-black bg-opacity-60"></div>
         <h1 class="absolute inset-0 flex items-center justify-center text-white text-2xl p-5">
           <div id="typedtext" class="bg-black bg-opacity-40 text-white text-md sm:text-lg md:text-xl lg:text-3xl xl:text-4xl" style="font-family: 'vcr'" v-html="typedText">
           </div>
         </h1>
       </div>
-      <div v-html="getArticle.bodyHTML" class="flex flex-col justify-center items-center"></div>
+      <div v-html="getArticle?.bodyHTML" class="flex flex-col justify-center items-center"></div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useArticleStore } from '@/stores/article.store'
+import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
-import { ref, onMounted, watchEffect } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+
+definePageMeta({
+  //retrieves single article
+  middleware: ['article']
+})
 
 const router = useRouter();
 
 const moment = (await import('moment')).default
 
-const { slug } = useRoute().params
+const { preserveState} = useAppStateStore()
 
-const { retrieveSingleArticle } = useArticleStore()
-
-await retrieveSingleArticle(slug)
-
-const { getArticle } = storeToRefs(useArticleStore())
+const { getArticle, getAllArticles } = storeToRefs(useArticleStore())
 
 const formatDate = (timestamp) => {
   return moment(timestamp).fromNow()
 }
 
-const goBack = () => {
+const goBack = async () => {
+  console.log("articles length?:", getAllArticles.value.length)
+  if (getAllArticles.value.length > 0) {
+    console.log("PRESERV STATE?:")
+    await preserveState(true)
+  }
   router.back();
 };
 
-let typedText = ref(''); // This will hold the text that's displayed in the template.
-let aText = ref([getArticle.value.title]) // The lines of text to display.
-let iIndex = ref(0); // The current index in aText.
-let iArrLength = ref(aText.value[iIndex.value].length); // The length of the current line.
-let iTextPos = ref(0); // The current position within the line.
-let iScrollAt = ref(20); // The number of lines to scroll at a time.
-let iSpeed = ref(30); // The speed of the typewriter.
+const target = ref(null)
 
-watchEffect(() => {
-  // Update iArrLength when iIndex changes.
-  iArrLength.value = aText.value[iIndex.value]?.length;
-});
+//initiates typewriter animation
+const { stop } = useIntersectionObserver(
+    target,
+    ([{ isIntersecting }], observerElement) => {
+      if (isIntersecting) {
+        typewriter();
+      }
+    },
+  );
 
-function typewriter() {
+let typedText = ref(''); 
+let aText = ref([getArticle?.value.title]) 
+let iIndex = ref(0); 
+let iTextPos = ref(0); 
+let iScrollAt = ref(20); 
+let iSpeed = ref(30);
+let timer = ref(null); // Keep track of setTimeout
+
+async function typewriter() {
   let iRow = Math.max(0, iIndex.value - iScrollAt.value);
   typedText.value = '';
 
@@ -138,22 +152,25 @@ function typewriter() {
 
   typedText.value += aText.value[iIndex.value].substring(0, iTextPos.value) + '<div class="cursor"></div>';
 
-  if (iTextPos.value++ == iArrLength.value) {
+  if (iTextPos.value++ == aText.value[iIndex.value]?.length) {
     iTextPos.value = 0;
     iIndex.value++;
 
     if (iIndex.value != aText.value.length) {
-      iArrLength.value = aText.value[iIndex.value].length;
-      setTimeout(typewriter, 500);
+      timer.value = setTimeout(typewriter, 500);
     }
   } else {
-    console.log("IS THIS INFINITE?")
-    setTimeout(typewriter, iSpeed.value);
+    timer.value = setTimeout(typewriter, iSpeed.value);
   }
 }
 
+// Clear the timeout when the component is unmounted
+onBeforeUnmount(() => {
+  if (timer.value) {
+    clearTimeout(timer.value);
+  }
+});
 
-onMounted(typewriter); // Call typewriter when the component is mounted.
 
 
 

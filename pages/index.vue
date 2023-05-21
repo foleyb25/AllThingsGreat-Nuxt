@@ -8,27 +8,40 @@
           </NuxtLink>
         </div>
       </transition-group>
-      <button @click="paginate">Load More</button>
+    </div>
+    <div v-if="getIsLoading" class="mt-8 flex justify-center items-center">
+      <SpinnerComponent/>
+    </div>
+    <div v-else class="mt-8 w-full flex justify-center items-center">
+      <button v-if="getHasMore" @click="paginate"
+        class="bg-[#111827] hover:bg-[#6b7280] text-white font-bold py-2 px-4 rounded">
+        Load More
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useArticleStore } from '@/stores/article.store'
+import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
 import { onMounted, nextTick } from 'vue'
 import gsap from "gsap";
 
 const route = useRoute()
-const { retrieveArticles, resetPageNumber, resetArticleList } = useArticleStore()
-const { getAllArticles } = storeToRefs(useArticleStore())
-
+const { retrieveArticles, resetState} = useArticleStore()
+const {preserveState} = useAppStateStore()
+const { getAllArticles, getHasMore, getIsLoading, getError } = storeToRefs(useArticleStore())
+const { getIsPreserveState} = storeToRefs(useAppStateStore())
 
 onMounted(async () => {
   await nextTick()
-  await resetPageNumber();
-  await resetArticleList();
-  await retrieveArticles(undefined);
+  if (!getIsPreserveState.value) {
+    await resetState()
+    await retrieveArticles(undefined)
+  }
+  //Since this is a top level route we are going to unpreserve the state
+  await preserveState(false)
 })
 
 const paginate = async () => {

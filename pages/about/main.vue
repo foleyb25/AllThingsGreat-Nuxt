@@ -10,9 +10,7 @@
 
 
 <script setup>
-import { ref, onMounted, watch, watchEffect } from 'vue'
-
-const targetIsVisible = ref(false)
+import { ref, onMounted, watchEffect } from 'vue'
 
 const image1Params = {
   h1_typedText: ref(''),
@@ -47,7 +45,7 @@ const image5Params = {
 const image6Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'So Next Time You\'re at Work,', p: 'And Kiss Ass Kevin is getting the best of you, or you simply just need to take shit...' }]),
+  aText: ref([{ h1: 'So Next Time You\'re at Work,', p: 'And Kiss Ass Kevin is getting the best of you, or you simply just need to take a shit...' }]),
 };
 
 const image7Params = {
@@ -120,53 +118,6 @@ scenes.forEach(scene => {
   );
 });
 
-watch(targetIsVisible, () => {
-  console.log("Target is visible")
-})
-
-// watch(getNuxtPageScrollPosition, (newPos) => {
-//   const scrollHeight = document.documentElement.scrollHeight;
-// const viewportHeight = window.innerHeight;
-// const totalScrollHeight = scrollHeight - viewportHeight;
-// const scrollPercent = newPos / totalScrollHeight;
-
-// // if (scrollPercent >= 0.1 && image2Params.h1_typedText.value === '') {
-// //   // trigger animation
-// // }
-//   console.log("Scroll Percent:" + scrollPercent)
-//   //0.96 big
-//   if (scrollPercent >= 1.96 && image2Params.h1_typedText.value === '') {
-//     const image2Typewriter = setupTypewriter(image2Params);
-//     image2Typewriter();
-//   }
-
-//   //4.00
-//   if (scrollPercent >= 5.358 && image3Params.h1_typedText.value === '') {
-//     const image3Typewriter = setupTypewriter(image3Params);
-//     image3Typewriter();
-//   }
-
-//   if (newPos >= 2990 && image4Params.h1_typedText.value === '') {
-//     const image4Typewriter = setupTypewriter(image4Params);
-//     image4Typewriter();
-//   }
-
-//   if (newPos >= 4200 && image5Params.h1_typedText.value === '') {
-//     const image5Typewriter = setupTypewriter(image5Params);
-//     image5Typewriter();
-//   }
-
-//   if (newPos >= 5425 && image6Params.h1_typedText.value === '') {
-//     const image6Typewriter = setupTypewriter(image6Params);
-//     image6Typewriter();
-//   }
-
-//   if (newPos >= 6650 && image7Params.h1_typedText.value === '') {
-//     const image7Typewriter = setupTypewriter(image7Params);
-//     image7Typewriter();
-//   }
-// });
-
 function setupTypewriter(params) {
   const { h1_typedText, p_typedText, aText } = params;
 
@@ -214,7 +165,6 @@ function setupTypewriter(params) {
 
       if (iIndex.value < aText.value.length) {
         iArrLength.value = isH1 ? aText.value[iIndex.value]?.h1.length : aText.value[iIndex.value]?.p.length;
-        console.log("AText:", aText.value['So Kick it, Chillax, and Ride the Vibe.'])
         setTimeout(typewriter, iSpeed.value);
       } else if (isH1 && aText.value[iIndex.value]?.p) {
         // The case when we're done with the last 'h1' but haven't finished 'p' yet.

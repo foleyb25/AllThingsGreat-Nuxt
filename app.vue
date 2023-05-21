@@ -4,9 +4,6 @@
     <!-- These head attributes can also be defined reactively in setup -->
 
     <Head>
-      <Title>{{ title }}</Title>
-      <Meta name="description" :content="title" />
-      <Style type="text/css" children=""></Style>
     </Head>
     <NuxtLayout v-slot:default="{ routeCategory }">
       <main
@@ -16,23 +13,13 @@
           <NavigationArticleTopicsComponent v-if="routeCategory === 'category' || routeCategory === 'articles'" class=" w-full h-full " />
           <NavigationAboutTopicsComponent v-if="routeCategory === 'about'" class=" w-full h-full" />
         </div>
-        <div ref="scrollContainer" @scroll="handleScroll" class="h-screen relative rounded z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll">
+        <div class="h-screen relative rounded z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll">
         <NuxtPage class="w-full h-full" />
         </div>
       </main>
-
     </NuxtLayout>
-    <div class="flex justify-around items-center z-50 bg-white shadow-lg p-2 fixed bottom-0 left-0 right-0 sm:hidden">
-      <!-- <NuxtLink to="/" class="flex flex-col items-center w-1/2 border-r border-black">
-    <font-awesome-icon :icon="['fas', 'shopping-cart']" />
-    Shop
-  </NuxtLink> -->
-      <NuxtLink to="/" class="flex flex-col items-center w-1/2">
-        <font-awesome-icon :icon="['fas', 'globe']" />
-        Articles
-      </NuxtLink>
-      <!-- Repeat for other navigation links -->
-    </div>
+    <NavigationMobileLinksComponent class="sm:hidden"/>
+    
 
   </div>
 </template>
@@ -40,43 +27,31 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
-import { useAppStateStore } from '@/stores/appstate.store'
+const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+const userInput = ref([]);
 
- const { setNuxtPageScrollPosition } = useAppStateStore()
+function onKeydown(event) {
+  userInput.value.push(event.key);
 
-const scrollContainer = ref(null)
+  // If the user input is longer than the Konami code, remove the first element
+  if (userInput.value.length > konamiCode.length) {
+    userInput.value.shift();
+  }
 
-const handleScroll = () => {
-  setNuxtPageScrollPosition(scrollContainer.value.scrollTop)
+  // Check if the user input matches the Konami code
+  if (JSON.stringify(userInput.value) === JSON.stringify(konamiCode)) {
+    console.log('Konami code entered!'); // Or trigger any event you want here
+    userInput.value = []; // Reset the user input
+  }
 }
 
 onMounted(() => {
-  nextTick(() => {
-      scrollContainer.value.addEventListener('scroll', handleScroll)
-  })
-})
+  window.addEventListener('keydown', onKeydown);
+});
 
 onUnmounted(() => {
-    scrollContainer.value.removeEventListener('scroll', handleScroll)
-})
-
-const title = ref("Nuxt Template")
-
-//Reactive Meta
-//usehead() gives you ability to define meta tags on specific pages like a single blog post :og tags
-useHead({
-  title: 'Nuxt Template',
-  meta: [
-    { name: 'description', content: 'My amazing site.' }
-  ],
-  bodyAttrs: {
-    class: (() => {
-      return 'test'
-    })
-  },
-  script: [{ children: 'console.log(\'Hello world\')' }]
-})
-
+  window.removeEventListener('keydown', onKeydown);
+});
 
 </script>
 
