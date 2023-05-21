@@ -114,9 +114,7 @@ const formatDate = (timestamp) => {
 }
 
 const goBack = async () => {
-  console.log("articles length?:", getAllArticles.value.length)
   if (getAllArticles.value.length > 0) {
-    console.log("PRESERV STATE?:")
     await preserveState(true)
   }
   router.back();

@@ -37,8 +37,9 @@ export const useArticleStore = defineStore('articleStore', {
   actions: {
     async retrieveArticles(category) {
       try {
-        const { apiBase } = useRuntimeConfig()
+        const { public: {apiBase} } = useRuntimeConfig()
         this.isLoading = true
+        this.error = null
         const data = await useFetch(`${apiBase}/articles/category/${category}/page/${this.pageNumber}`);
         this.isLoading = false
         if (data.data) {
@@ -57,7 +58,8 @@ export const useArticleStore = defineStore('articleStore', {
 
     async retrieveSingleArticle(slug) {
       try {
-        const { apiBase } = useRuntimeConfig()
+        const { public: {apiBase} } = useRuntimeConfig()
+        this.error = null
         this.isArticleLoading = true
         const data = await useFetch(`${apiBase}/articles/slug/${slug}`);
         this.isArticleLoading = false

@@ -1,6 +1,6 @@
 <!-- Slide.vue -->
 <template>
-    
+    <div>
     <Transition name="fade">
       <div v-if="props.isOpen" @click="toggleMenu" class="z-[49] fixed inset-0 w-screen h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm"></div>
     </Transition>
@@ -12,6 +12,7 @@
         <slot/>
       </div>
     </Transition>
+  </div>
   </template>
   
   <script setup>
