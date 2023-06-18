@@ -14,42 +14,61 @@ export default defineNuxtConfig({
   ],
 
   // pwa: {
-  //   // manifest: {
-  //   //   name: 'All Things Great',
-  //   //   short_name: 'ATG',
-  //   //   description: "All Things Great Application",
-  //   //   lang: 'fa',
-  //   //   useWebmanifestExtension: false,
-  //   //   icons: [
-  //   //     {
-  //   //       src: 'icons/64.png',
-  //   //       sizes: "64x64",
-  //   //       type: 'image/png'
-  //   //     },
-  //   //     {
-  //   //       src: 'icons/144.png',
-  //   //       sizes: "144x144",
-  //   //       type: 'image/png'
-  //   //     },
-  //   //     {
-  //   //       src: 'icons/196.png',
-  //   //       sizes: "196x196",
-  //   //       type: 'image/png'
-  //   //     },
-  //   //     {
-  //   //       src: 'icons/512.png',
-  //   //       sizes: "512x512",
-  //   //       type: 'image/png'
-  //   //     }
-  //   //   ]
-  //   // },
-  //   workbox : {
-  //     navigateFallback: "/"
+  //   manifest: {
+  //     name: 'All Things Great',
+  //     short_name: 'ATG',
+  //     description: "All Things Great Application",
+  //     lang: 'fa',
+  //     useWebmanifestExtension: false,
+  //     icons: [
+  //       {
+  //         src: 'icons/64.png',
+  //         sizes: "64x64",
+  //         type: 'image/png'
+  //       },
+  //       {
+  //         src: 'icons/144.png',
+  //         sizes: "144x144",
+  //         type: 'image/png'
+  //       },
+  //       {
+  //         src: 'icons/196.png',
+  //         sizes: "196x196",
+  //         type: 'image/png'
+  //       },
+  //       {
+  //         src: 'icons/512.png',
+  //         sizes: "512x512",
+  //         type: 'image/png'
+  //       }
+  //     ]
   //   },
-  //   //  devOptions: {
-  //   //   enabled: true,
-  //   //   type: 'module'
-  //   //  }
+  //    devOptions: {
+  //     enabled: true,
+  //     type: 'module'
+  //    },
+
+  //    meta: {
+  //     charset: 'utf-8',
+  //     appleStatusBarStyle: 'black-translucent',
+  //     favicon: true,
+  //     name: 'All Things Great',
+  //     author: 'Author Name',
+  //     description: 'Description of the application',
+  //     theme_color: '#317EFB',
+  //     lang: 'en',
+  //     ogType: 'website',
+  //     ogSiteName: 'All Things Great',
+  //     ogTitle: 'All Things Great - App Title',
+  //     ogDescription: 'Description for OpenGraph',
+  //     ogHost: 'https://example.com',
+  //     ogImage: 'https://example.com/static/image.jpg',
+  //     ogUrl: 'https://example.com',
+  //     twitterCard: 'summary_large_image',
+  //     twitterSite: '@twitterHandle',
+  //     twitterCreator: '@twitterHandle',
+  //     nativeUI: true
+  //   }
   // },
 
 

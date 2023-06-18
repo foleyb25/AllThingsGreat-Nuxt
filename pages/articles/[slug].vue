@@ -28,12 +28,11 @@
 
 
 
-        <div class="flex justify-start">
-          <!-- Replace with actual social share buttons -->
+        <!-- <div class="flex justify-start">
           <button class="text-white rounded">
             <font-awesome-icon icon="fa-brands fa-twitter-square" size="2x" class="text-[#1DA1F2]" />
           </button>
-        </div>
+        </div> -->
 
       </header>
       <header class="grid grid-cols-3 gap-5 border-b border-black text-xs sm:text-xs md:text-sm lg:text-xl xl:text-xl">
@@ -84,7 +83,7 @@
           </div>
         </h1>
       </div>
-      <div v-html="getArticle?.bodyHTML" class="flex flex-col justify-center items-center"></div>
+      <div v-html="getArticle?.bodyHTML" class="mt-8 p-4 flex flex-col justify-center items-center"></div>
     </div>
   </div>
 </template>
