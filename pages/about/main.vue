@@ -21,37 +21,37 @@ const image1Params = {
 const image2Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'Welcome To All Things Great', p: 'Covering topics ranging from Technology to Combat Sports to whatever the hell we want to talk about - we are your platform for content consumption' }]),
+  aText: ref([{ h1: 'Vision: One Step At a Time, Towards Greatness', p: 'embarking on a journey to greatness, we cover a wide array of topics ranging from technology, combat sports, and your daily dose of inspiration - we are your platform for content consumption.' }]),
 };
 
 const image3Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'We Utilize', p: 'Cutting edge technology such as chatGPT for article evaluations. Even though we may have A.I. write a few articles on current events to keep content fresh, our content is primarily coming from us - in human form.' }]),
+  aText: ref([{ h1: 'Harnessing Innovation', p: 'with our leveraging of cutting edge technology such as chatGPT, Midjourney, and advancements still to come. Even though we may have A.I. generate fresh content. content is primarily coming from us - in human form.' }]),
 };
 
 const image4Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'Because You Know What A.I Isn\'t Very Good At?', p: 'Smut. 100% pure unadulterated Columbian co..Smut.' }]),
+  aText: ref([{ h1: 'Because You Know Where A.I Falls Short?', p: 'being human - the entirety of our raw, imperfect, and authentic selves.' }]),
 };
 
 const image5Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'Perfect is for the Urgent', p: 'And we are here to provide you with entertainment while you\'re on the 9-5 grind.' }]),
+  aText: ref([{ h1: 'Perfect is for the Urgent', p: 'and our mission is to offer you a dose of entertainment to spice up your 9-5 monotony.' }]),
 };
 
 const image6Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'So Next Time You\'re at Work,', p: 'And Kiss Ass Kevin is getting the best of you, or you simply just need to take a shit...' }]),
+  aText: ref([{ h1: 'So Next Time You\'re at Work,', p: 'and you need to take a shit...' }]),
 };
 
 const image7Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'Open All Things Great', p: 'And find your and find your happy place' }]),
+  aText: ref([{ h1: 'Open All Things Great', p: 'and find your and find your happy place.' }]),
 };
 
 const scenes = [
