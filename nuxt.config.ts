@@ -20,6 +20,9 @@ export default defineNuxtConfig({
 
   gtag: {
     id: 'G-NQTTSR0EPB',
+    config: {
+      page_title: "AllThingsGreat"
+    }
   },
 
   // pwa: {
