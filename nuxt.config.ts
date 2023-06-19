@@ -14,8 +14,13 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vueuse/nuxt',
+    'nuxt-gtag'
     // '@vite-pwa/nuxt'
   ],
+
+  gtag: {
+    id: 'G-NQTTSR0EPB',
+  },
 
   // pwa: {
   //   manifest: {
