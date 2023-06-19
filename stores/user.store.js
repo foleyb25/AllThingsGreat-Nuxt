@@ -22,18 +22,27 @@ export const useUserStore = defineStore('userStore', {
         try {
           const { public: {apiBase} } = useRuntimeConfig()
           this.error = null
-          this.isLoading = true      
-          const { data } = await useFetch(`${apiBase}/users/application/submit`, {
+          this.isLoading = true
+          console.log("FETCHING API POST")      
+          const {data, error} = await useFetch(`${apiBase}/users/application/submit`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(formObject),
-          }).fetch();
-      
-          console.log(data, ": Data")
+          })
           this.isLoading = false
+          if (error.value) {
+            console.log("Error Value: ", this.error)
+            this.error = error.value
+            console.log("Error Value: ", this.error)
+          } else {
+            return data
+          }
+          
         } catch (e) {
+          console.log("Error: ", e)
+          this.isLoading = false
           this.error = e.message
         }
       }

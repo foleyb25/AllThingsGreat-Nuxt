@@ -28,7 +28,7 @@
             </div>
             <button v-if="!isLoading" class="mt-6 mb-6 px-4 py-2 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-600" type="submit">Apply Now</button>
             <div v-else>Loading...</div>
-            <div v-if="error">Error, uploading data</div>
+            <div class="w-full rounded-xl bg-red-400 text-center" v-if="error">Error, with request. Please try again later.</div>
             <hr class="mt-6">
         </form>
     </div>
@@ -40,7 +40,7 @@ import { useUserStore } from '@/stores/user.store'
 import { storeToRefs } from 'pinia';
 
 const {submitJobApplication} = useUserStore()
-const {isLoading, error} = storeToRefs(storeToRefs())
+const {isLoading, error} = storeToRefs(useUserStore())
 
 const fullName = ref('');
 const email = ref('');
