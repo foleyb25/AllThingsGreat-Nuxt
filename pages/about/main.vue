@@ -27,7 +27,7 @@ const image2Params = {
 const image3Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'Harnessing Innovation', p: 'with our leveraging of cutting edge technology such as chatGPT, Midjourney, and advancements still to come. Even though we may have A.I. generate fresh content. content is primarily coming from us - in human form.' }]),
+  aText: ref([{ h1: 'Harnessing Innovation', p: 'with our leveraging of cutting edge technology such as chatGPT, Midjourney, and advancements still to come. Even though we may have A.I. generate fresh content, creativity is primarily coming from us - in human form.' }]),
 };
 
 const image4Params = {
