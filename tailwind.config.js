@@ -13,7 +13,10 @@ module.exports = {
     extend: {
       fontFamily: {
         'vcr': ['vcr', 'sans-serif'],
-      }
+      },
+      height: {
+        'screen/60': 'calc(100vh - 230px)',
+       }
     },
     
   },

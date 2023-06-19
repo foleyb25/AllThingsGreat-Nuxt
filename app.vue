@@ -13,7 +13,7 @@
           <NavigationArticleTopicsComponent v-if="routeCategory === 'category' || routeCategory === 'articles'" class=" w-full h-full " />
           <NavigationAboutTopicsComponent v-if="routeCategory === 'about'" class=" w-full h-full" />
         </div>
-        <div class="h-screen relative rounded z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll">
+        <div class="h-screen/60 sm:h-screen relative rounded z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll">
         <NuxtPage class="w-full h-full" />
         </div>
       </main>
