@@ -13,7 +13,7 @@
           <NavigationArticleTopicsComponent v-if="routeCategory === 'category' || routeCategory === 'articles'" class=" w-full h-full " />
           <NavigationAboutTopicsComponent v-if="routeCategory === 'about'" class=" w-full h-full" />
         </div>
-        <div class="h-screen/60 sm:h-screen relative rounded z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll">
+        <div ref="scrollContainer" class="h-screen/60 sm:h-screen relative rounded z-[1] w-[95%] sm:w-[67%] bg-white overflow-y-scroll">
         <NuxtPage class="w-full h-full" />
         </div>
       </main>
@@ -26,9 +26,17 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { useAppStateStore } from '@/stores/appstate.store'
 
 const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
 const userInput = ref([]);
+
+const { setNuxtPageScrollPosition } = useAppStateStore()
+
+const scrollContainer = ref(null)
+const handleScroll = () => {
+  setNuxtPageScrollPosition(scrollContainer.value.scrollTop)
+}
 
 function onKeydown(event) {
   userInput.value.push(event.key);
@@ -46,10 +54,16 @@ function onKeydown(event) {
 }
 
 onMounted(() => {
+  nextTick(() => {
+      scrollContainer.value.addEventListener('scroll', handleScroll)
+  })
   window.addEventListener('keydown', onKeydown);
 });
 
 onUnmounted(() => {
+  nextTick(() => {
+      scrollContainer.value.addEventListener('scroll', handleScroll)
+  })
   window.removeEventListener('keydown', onKeydown);
 });
 

@@ -35,7 +35,7 @@ const { getNuxtPageScrollPosition } = storeToRefs(useAppStateStore())
   .parallax {
     height: 100vh;
     border-bottom: 10px solid black;
-    background-attachment: fixed;
+    background-position: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
