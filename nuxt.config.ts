@@ -5,7 +5,7 @@
 export default defineNuxtConfig({
  
    plugins: [
-     { src: '~/plugins/super-matomo-plugin.client.js', ssr: true }
+     { src: '~/plugins/super-matomo-plugin.client.js', ssr: false }
    ],
 
   // You can also import tailwind with modules and @nuxtjs/tailwindcss dev dependency
