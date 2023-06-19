@@ -31,7 +31,7 @@ const props = defineProps( [
 const socialLinks = [
 {
     name: 'Twitter',
-    url: 'https://twitter.com',
+    url: 'https://twitter.com/AllThingsG83856',
     icon: 'twitter-square'
   },
   {
@@ -41,7 +41,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    url: 'https://instagram.com/',
+    url: 'https://www.instagram.com/itsallthingsgreat/',
     icon: 'instagram-square'
   }
 
