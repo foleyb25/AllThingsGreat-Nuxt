@@ -15,7 +15,7 @@ module.exports = {
         'vcr': ['vcr', 'sans-serif'],
       },
       height: {
-        'screen/60': 'calc(100vh - 230px)',
+        'screen/60': 'calc(100vh - 250px)',
        }
     },
     

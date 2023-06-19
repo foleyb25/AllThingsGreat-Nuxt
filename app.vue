@@ -7,7 +7,7 @@
     </Head>
     <NuxtLayout v-slot:default="{ routeCategory }">
       <main
-        class="main-content relative overflow-hidden rounded w-full mt-[60px] pb-[100px] pt-4 bg-primary-dark flex flex-row justify-center">
+        class="main-content relative overflow-hidden rounded w-full pb-[75px] pt-4 bg-primary-dark flex flex-row justify-center">
         <img src="./assets/images/waves.svg" class="w-full absolute h-[649px]  left-0 overflow-hidden" alt="">
         <div class="relative h-full w-[27%] mr-4 shadow-2xl z-[1] rounded bg-white overflow-hidden hidden sm:block">
           <NavigationArticleTopicsComponent v-if="routeCategory === 'category' || routeCategory === 'articles'" class=" w-full h-full " />
