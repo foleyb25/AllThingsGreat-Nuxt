@@ -3,6 +3,10 @@
 // NOTE: scss styling overrides tailwind styling
 
 export default defineNuxtConfig({
+ 
+   plugins: [
+     { src: '~/plugins/super-matomo-plugin.client.js', ssr: true }
+   ],
 
   // You can also import tailwind with modules and @nuxtjs/tailwindcss dev dependency
   modules: [
@@ -103,6 +107,7 @@ export default defineNuxtConfig({
 
     head: {
       charset: 'utf-16',
+      
       viewport: 'width=device-width, initial-scale=1',
       title: 'All Things Great',
       meta: [
