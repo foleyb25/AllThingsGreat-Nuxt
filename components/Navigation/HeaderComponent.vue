@@ -9,12 +9,12 @@
           <span class="text-xl font-semibold text-white ml-2"></span>
         </div>
         <ul class="flex text-xs sm:text-base">
-          <li v-for="link in socialLinks" :key="link.name">
+          <li class="m-2" v-for="link in socialLinks" :key="link.name">
             <NuxtLink :to="link.url" target="_blank" class="text-gray-300 hover:text-white mr-4">
               <font-awesome-icon :icon="['fab', link.icon]" size="2x"/>
             </NuxtLink>
           </li>
-          <li><button  @click="toggleMenu" class="sm:hidden text-[#111827] hover:text-white"><font-awesome-icon :icon="['fas', 'bars']" size="2x"/></button></li>
+          <li class="m-2"><button  @click="toggleMenu" class="sm:hidden text-[#111827] hover:text-white"><font-awesome-icon :icon="['fas', 'bars']" size="2x"/></button></li>
         </ul>
       </nav>
       <ul id="navLinks" class="flex-row justify-center items-center hidden sm:flex">
