@@ -18,7 +18,7 @@
           <li>
 
             <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/category/collegefootball' }">
-              <div @click="$emit('linkClicked')" class="cursor-pointer">Cryptocurrency</div>
+              <div @click="$emit('linkClicked')" class="cursor-pointer">College Football</div>
             </NuxtLink>
           </li>
           <li>
