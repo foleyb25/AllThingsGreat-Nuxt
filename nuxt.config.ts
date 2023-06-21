@@ -132,7 +132,7 @@ export default defineNuxtConfig({
   //To expose variables to browser put keys inside of public
   runtimeConfig: {
     public: {
-      apiBase: (process.env.NUXT_ENV === 'development') ? "http://localhost:8080/api/v2" : "https://allthingsgreatwriter-prod-e4573881d749.herokuapp.com/api/v2",
+      apiBase: process.env.NUXT_API_URL
     }
   }
 })
