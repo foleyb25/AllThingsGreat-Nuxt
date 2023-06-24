@@ -51,7 +51,7 @@ const image6Params = {
 const image7Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'Open All Things Great', p: 'and find your and find your happy place.' }]),
+  aText: ref([{ h1: 'Open All Things Great', p: 'and find your happy place.' }]),
 };
 
 const scenes = [
