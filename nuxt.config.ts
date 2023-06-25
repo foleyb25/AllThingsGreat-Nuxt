@@ -124,6 +124,16 @@ export default defineNuxtConfig({
       ],
       link: [
         {rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
+      ],
+      script: [
+        {
+          src: "https://platform.twitter.com/widgets.js",
+          body: true
+        },
+        {
+          src: "https://www.instagram.com/embed.js",
+          body: true
+        }
       ]
     }
   },

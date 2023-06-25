@@ -1,14 +1,12 @@
 <template>
-  <div class="p-4">
-
     <!-- Back Button -->
-    <button class="sticky top-2 left-2 bg-black bg-opacity-50 text-white p-2 rounded-full z-50" @click="goBack">
+    <button class="sticky top-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded-full z-50" @click="goBack">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
 
-    <div class="relative">
+    <div class="relative p-4">
       <header class="grid grid-cols-2 gap-5 border-b border-black">
         <div class="flex items-center text-md sm:text-md md:text-lg lg:text-xl xl:text-xl">
           <img :src="getArticle?.writer.profileImageUrl" alt="Author's Avatar" class="w-20 h-20 rounded-full mr-2" />
@@ -83,16 +81,15 @@
           </div>
         </h1>
       </div>
-      <div v-html="getArticle?.bodyHTML" class="mt-8 p-4 flex flex-col justify-center items-center"></div>
+      <div class="relative article-content" v-html="getArticle?.bodyHTML"></div>
     </div>
-  </div>
 </template>
 
 <script setup>
 import { useArticleStore } from '@/stores/article.store'
 import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUpdated } from 'vue';
 import { useRouter } from 'vue-router';
 
 definePageMeta({
@@ -168,8 +165,95 @@ onBeforeUnmount(() => {
   }
 });
 
+onMounted(() => {
+	loadTwitterWidget();
+  loadInstagramWidget();
+});
 
+onUpdated(() => {
+  if (window.twttr && window.twttr.widgets) {
+    window.twttr.widgets.load();
+  }
+  loadInstagramWidget();
+});
 
+const loadTwitterWidget = () => {
+  if (!window.twttr) {
+    let script = document.createElement("script");
+    script.setAttribute("src", "https://platform.twitter.com/widgets.js");
+    document.head.appendChild(script);
+  }
+};
+
+const loadInstagramWidget = () => {
+  // Remove existing Instagram embed script
+  let existingScript = document.getElementById('instagram-embed-script');
+  if (existingScript) {
+    existingScript.remove();
+  }
+
+  // Add new Instagram embed script
+  let script = document.createElement('script');
+  script.async = true;
+  script.defer = true;
+  script.id = 'instagram-embed-script';
+  script.src = "//www.instagram.com/embed.js";
+  document.body.appendChild(script);
+};
 
 </script>
+
+<style lang="scss">
+.article-content {
+
+  .twitter-tweet {
+    @apply mx-auto;
+    margin-top: 40px !important;
+    max-width: 100%;
+  }
+
+  iframe {
+    max-width: 100%;
+    @apply mx-auto aspect-video w-full lg:w-2/3;
+    display: block !important;
+
+  }
+
+  iframe.instagram-media {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    
+  }
+
+  p {
+    @apply text-left m-1;
+  }
+
+  h1 {
+    @apply text-4xl font-bold m-1;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold m-1;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold m-1;
+  }
+
+  h4 {
+    @apply text-xl font-semibold m-1;
+  }
+
+  h5 {
+    @apply text-lg font-medium m-1;
+  }
+
+  h6 {
+    @apply text-base font-medium m-1;
+  }
+
+  /* Add your additional styles here */
+}
+</style>
 
