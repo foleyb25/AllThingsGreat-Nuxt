@@ -1,4 +1,5 @@
 <template>
+  <div class="overflow-y-scroll">
     <!-- Back Button -->
     <button class="sticky top-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded-full z-50" @click="goBack">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
@@ -83,6 +84,7 @@
       </div>
       <div class="relative article-content" v-html="getArticle?.bodyHTML"></div>
     </div>
+  </div>
 </template>
 
 <script setup>

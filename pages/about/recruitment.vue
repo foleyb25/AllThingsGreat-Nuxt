@@ -1,4 +1,7 @@
 <template>
+    <div class="overflow-y-scroll">
+
+    
     <div class="max-w-xl mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold text-gray-900">Join All Things Great</h1>
         <p We class="mt-4 text-lg text-gray-700">We're seeking unique voices to join our blogging team and help us deliver thought-provoking, entertaining, and informative content to our audience.</p>
@@ -32,6 +35,7 @@
             <hr class="mt-6">
         </form>
     </div>
+</div>
 </template>
 
 <script setup>

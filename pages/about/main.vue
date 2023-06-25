@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="overflow-y-scroll">
     <ParallaxComponent v-for="(scene, index) in scenes" :key="index" :imageSrc="scene.imageSrc">
         <h1 class="bg-black bg-opacity-80" :ref="scene.elementRef" :class="scene.h1Class" v-html="scene.params.h1_typedText.value"></h1>
         <p class="bg-black bg-opacity-80" :class="scene.pClass" v-html="scene.params.p_typedText.value"></p>

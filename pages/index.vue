@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 max-h-screen bg-gray-50 overflow-scroll shadow-2xl">
+  <div class="p-4 max-h-screen bg-gray-50 overflow-y-scroll shadow-2xl">
     <div class="grid gap-4 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
       <transition-group :css="false" @enter="onEnter">
         <div v-if="getAllArticles.length > 0" v-for="(article, index) in getAllArticles" :key="article._id" :data-index="index">
@@ -42,6 +42,7 @@ const route = useRoute()
 const { retrieveArticles, resetState} = useArticleStore()
 const {preserveState} = useAppStateStore()
 const { getAllArticles, getHasMore, getIsLoading, getError } = storeToRefs(useArticleStore())
+const articleStoreGetter = storeToRefs(useArticleStore())
 const { getIsPreserveState} = storeToRefs(useAppStateStore())
 
 onMounted(async () => {
