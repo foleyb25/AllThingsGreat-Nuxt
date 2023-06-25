@@ -24,6 +24,7 @@
   </template>
 
   <script setup>
+
 const props = defineProps( [
   'toggleMenu'
 ])

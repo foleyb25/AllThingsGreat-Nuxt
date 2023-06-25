@@ -5,6 +5,7 @@ export const useAppStateStore = defineStore('appStateStore', {
     state: () => ({
         nuxtPageScrollPosition: 0,
         isPreserveState: false,
+        url: ''
     }),
 
     getters: {
@@ -14,6 +15,10 @@ export const useAppStateStore = defineStore('appStateStore', {
 
         getIsPreserveState: (state) => {
             return state.isPreserveState
+        },
+
+        getUrl: (state) => {
+            return state.url
         }
     },
 
@@ -26,5 +31,9 @@ export const useAppStateStore = defineStore('appStateStore', {
         async preserveState(boolean) {
             this.isPreserveState = boolean
         },
+
+        setUrl(url) {
+            this.url = url
+        }
     }
 })
