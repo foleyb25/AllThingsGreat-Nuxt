@@ -225,6 +225,11 @@ const loadInstagramWidget = () => {
     
   }
 
+  img {
+    @apply mx-auto my-12;
+    max-width: 100% !important;
+  }
+
   p {
     @apply text-left m-1;
   }

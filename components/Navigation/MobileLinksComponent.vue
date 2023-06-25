@@ -6,7 +6,7 @@
       Articles
     </NuxtLink>
   </li>
-  <li class="w-1/2 flex items-center justify-center border-r border-black">
+  <li class="w-1/2 flex items-center justify-center">
     <NuxtLink to="/about/main" class="tab-link" :class="aboutClass">
       <font-awesome-icon :icon="['fas', 'address-card']" ></font-awesome-icon>
       About
