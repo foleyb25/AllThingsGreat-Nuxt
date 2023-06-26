@@ -5,6 +5,7 @@ export const useAppStateStore = defineStore('appStateStore', {
     state: () => ({
         nuxtPageScrollPosition: 0,
         isPreserveState: false,
+        linksDisabled: false,
         url: ''
     }),
 
@@ -19,6 +20,10 @@ export const useAppStateStore = defineStore('appStateStore', {
 
         getUrl: (state) => {
             return state.url
+        },
+
+        getLinksDisabled: (state) => {
+            return state.linksDisabled
         }
     },
 
@@ -34,6 +39,12 @@ export const useAppStateStore = defineStore('appStateStore', {
 
         setUrl(url) {
             this.url = url
+        },
+
+        async setLinksDisabled(isDisabled) {
+            this.linksDisabled = isDisabled
         }
+
+        
     }
 })

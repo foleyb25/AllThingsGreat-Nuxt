@@ -22,8 +22,7 @@ export const useUserStore = defineStore('userStore', {
         try {
           const { public: {apiBase} } = useRuntimeConfig()
           this.error = null
-          this.isLoading = true
-          console.log("FETCHING API POST")      
+          this.isLoading = true    
           const {data, error} = await useFetch(`${apiBase}/users/application/submit`, {
             method: 'POST',
             headers: {
@@ -33,15 +32,12 @@ export const useUserStore = defineStore('userStore', {
           })
           this.isLoading = false
           if (error.value) {
-            console.log("Error Value: ", this.error)
             this.error = error.value
-            console.log("Error Value: ", this.error)
           } else {
             return data
           }
           
         } catch (e) {
-          console.log("Error: ", e)
           this.isLoading = false
           this.error = e.message
         }

@@ -4,14 +4,16 @@
         <div class="overflow-y-auto py-4 px-3 rounded ">
           <ul class="divide-y divide-gray-200 sm:divide-opacity-0">
             <li>
-              <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white" :to="{ path: '/about/main' }">
-                <div @click="$emit('linkClicked')" class="cursor-pointer">About</div>
-              </NuxtLink>
+              <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/about/main')">
+              <div @click="$emit('linkClicked')" class="cursor-pointer">About</div>
+          </button>
+
             </li>
             <li>
-              <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/about/recruitment' }">
-                <div @click="$emit('linkClicked')" class="cursor-pointer">Become a Writer</div>
-              </NuxtLink>
+              <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/about/recruitment')">
+              <div @click="$emit('linkClicked')" class="cursor-pointer">Become a Writer</div>
+          </button>
+
             </li>
           </ul>
         </div>
@@ -19,19 +21,18 @@
     </div>
   </template>
    
-  <script>
-  export default {
-    data() {
-      return {
-        showDropdown: false,
-      };
-    },
-    methods: {
-      toggleDropdown() {
-        this.showDropdown = !this.showDropdown;
-      },
-    },
-  };
+  <script setup>
+import { useAppStateStore } from '@/stores/appstate.store'
+import { storeToRefs } from 'pinia';
+
+const router = useRouter();
+
+//url set in appstate.global.js middleware
+const { getLinksDisabled } = storeToRefs(useAppStateStore())
+
+const handleLinkClick = (route) =>{
+  router.push({ path: route });
+}
   </script>
   
   <style scoped>

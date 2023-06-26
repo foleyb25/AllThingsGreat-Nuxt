@@ -92,7 +92,6 @@ import { useArticleStore } from '@/stores/article.store'
 import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, onUpdated } from 'vue';
-import { useRouter } from 'vue-router';
 
 definePageMeta({
   //retrieves single article

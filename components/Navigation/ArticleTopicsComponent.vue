@@ -4,68 +4,75 @@
       <div class="overflow-y-auto py-4 px-3 rounded ">
         <ul class="divide-y divide-gray-200 sm:divide-opacity-0">
           <li>
-            <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white" :to="{ path: '/category/allthingsgreat' }">
+
+            <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/category/allthingsgreat')">
               <div @click="$emit('linkClicked')" class="cursor-pointer">All Things Great</div>
-            </NuxtLink>
+          </button>
+
           </li>
           <li>
 
-            <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/category/combatsports' }">
+            <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/category/combatsports')">
               <div @click="$emit('linkClicked')" class="cursor-pointer">Combat Sports</div>
-            </NuxtLink>
+          </button>
 
           </li>
           <li>
 
-            <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/category/collegefootball' }">
+            <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/category/collegefootball')">
               <div @click="$emit('linkClicked')" class="cursor-pointer">College Football</div>
-            </NuxtLink>
+          </button>
+
           </li>
           <li>
 
-            <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/category/ait' }">
-              <div @click="$emit('linkClicked')" class="cursor-pointer">Technology and A.I.</div>
-            </NuxtLink>
+            <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/category/ait')">
+              <div @click="$emit('linkClicked')" class="cursor-pointer">Technology</div>
+          </button>
+
           </li>
           <li>
 
-            <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/category/healthandfitness' }">
+            <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/category/healthandfitness')">
               <div @click="$emit('linkClicked')" class="cursor-pointer">Health and Fitness</div>
-            </NuxtLink>
+          </button>
 
           </li>
           <li>
 
-            <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/category/extraordinary' }">
+
+            <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/category/extraordinary')">
               <div @click="$emit('linkClicked')" class="cursor-pointer">Extraordinary</div>
-            </NuxtLink>
+          </button>
+
           </li>
           <li>
 
-            <NuxtLink class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" :to="{ path: '/category/matchupanalysis' }">
+            <button :disabled="getLinksDisabled" class="menu-link block py-2 px-3 hover:bg-gray-700  sm:hover:bg-white rounded" @click="handleLinkClick('/category/matchupanalysis')">
               <div @click="$emit('linkClicked')" class="cursor-pointer">Matchup Analysis</div>
-            </NuxtLink>
+          </button>
           </li>
 
         </ul>
+        {{ getLinksDisabled }}
       </div>
     </aside>
   </div>
 </template>
  
-<script>
-export default {
-  data() {
-    return {
-      showDropdown: false,
-    };
-  },
-  methods: {
-    toggleDropdown() {
-      this.showDropdown = !this.showDropdown;
-    },
-  },
-};
+<script setup>
+import { useAppStateStore } from '@/stores/appstate.store'
+import { storeToRefs } from 'pinia';
+
+const router = useRouter();
+
+//url set in appstate.global.js middleware
+const { getLinksDisabled } = storeToRefs(useAppStateStore())
+
+const handleLinkClick = (route) =>{
+  router.push({ path: route });
+}
+
 </script>
 
 <style scoped>
