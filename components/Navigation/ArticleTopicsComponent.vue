@@ -54,7 +54,6 @@
           </li>
 
         </ul>
-        {{ getLinksDisabled }}
       </div>
     </aside>
   </div>
