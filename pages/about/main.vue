@@ -1,9 +1,11 @@
 <template>
-  <div class="overflow-y-scroll">
+  <div ref="scrollContainer" class="overflow-y-scroll">
     <ParallaxComponent v-for="(scene, index) in scenes" :key="index" :imageSrc="scene.imageSrc">
         <h1 class="bg-black bg-opacity-80" :ref="scene.elementRef" :class="scene.h1Class" v-html="scene.params.h1_typedText.value"></h1>
         <p class="bg-black bg-opacity-80" :class="scene.pClass" v-html="scene.params.p_typedText.value"></p>
-      
+        <div v-if="!hasScrolled" class="scroll-hint">
+          <font-awesome-icon class="bounce" :icon="['fas', 'chevron-down']" ></font-awesome-icon>
+        </div>
     </ParallaxComponent>
   </div>
 </template>
@@ -11,6 +13,43 @@
 
 <script setup>
 import { ref, onMounted, watchEffect } from 'vue'
+import { storeToRefs } from 'pinia';
+import { useAppStateStore } from '~/stores/appstate.store';
+
+const {getNuxtPageScrollPosition} = storeToRefs(useAppStateStore())
+
+const hasScrolled = ref(false);
+
+watch( getNuxtPageScrollPosition, (newValue, oldValue) => {
+  console.log(getNuxtPageScrollPosition)
+  if (newValue != oldValue) {
+    console.log("Has scrolled?")
+    hasScrolled.value = true;
+  }
+})
+
+const { setNuxtPageScrollPosition } = useAppStateStore()
+
+const scrollContainer = ref(null)
+
+const handleScroll = () => {
+  setNuxtPageScrollPosition(scrollContainer.value.scrollTop)
+}
+
+onMounted(() => {
+  nextTick(() => {
+      scrollContainer.value.addEventListener('scroll', handleScroll)
+  })
+});
+
+onUnmounted(() => {
+  nextTick(() => {
+      scrollContainer.value.addEventListener('scroll', handleScroll)
+  })
+});
+
+
+
 
 const image1Params = {
   h1_typedText: ref(''),
@@ -188,3 +227,25 @@ onMounted(() => {
 
 
 </script>
+
+<style scoped>
+.scroll-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-30px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-15px);
+  }
+}
+</style>

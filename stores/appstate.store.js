@@ -29,6 +29,7 @@ export const useAppStateStore = defineStore('appStateStore', {
 
     actions: {
         setNuxtPageScrollPosition(position) {
+            console.log(position);
             this.nuxtPageScrollPosition = position
         },
 
