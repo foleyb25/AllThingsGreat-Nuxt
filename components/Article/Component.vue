@@ -4,16 +4,19 @@
 		<div class="h-[62%] w-full relative overflow-hidden">
 			<img class="h-full w-full object-cover rounded-t" :src="props.article.imageUrl" alt="" />
 		</div>
-		<div class="p-1 h-[80%]">
+		<div class="p-2 h-[80%]">
 			<div class="h-[45%] break-words line-clamp-3 font-semibold p-1">
 				{{ props.article.title }}
 			</div>
-			<div class="mt-1 w-full bg-gradient-to-r rounded from-[#007FFF] to-[#FF073A] relative text-center"> Smut {{
+			<div class="italic text-gray-600">
+				{{ formatDate(article.createdAt) }}
+			</div>
+			<!-- <div class="mt-1 w-full bg-gradient-to-r rounded from-[#007FFF] to-[#FF073A] relative text-center"> Smut {{
 				props.article.evaluation.smut }}/10
 				<div class="absolute top-0 bg-black bg-opacity-30 h-full w-2 rounded"
 					:style="{ left: (props.article.evaluation.smut) * 10 + '%' }">
 				</div>
-			</div>
+			</div> -->
 			<!-- <div class="flex items-center font-light h-[10%]">
 				{{ props.article.numberOfRatings }}
 				Ratings
@@ -66,5 +69,11 @@
 const props = defineProps([
 	"article",
 ]);
+
+const moment = (await import('moment')).default
+
+const formatDate = (timestamp) => {
+  return moment(timestamp).fromNow()
+}
 
 </script>
