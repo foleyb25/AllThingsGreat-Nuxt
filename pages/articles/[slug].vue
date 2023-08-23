@@ -53,12 +53,21 @@ import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, onUpdated } from 'vue';
 
-const firstPText = getFirstPTagText(getArticle.bodyHTML)
+
 
 definePageMeta({
   //retrieves single article
   middleware: ['article']
 })
+
+
+const router = useRouter();
+
+const moment = (await import('moment')).default
+
+const { preserveState} = useAppStateStore()
+
+const { getArticle, getAllArticles } = storeToRefs(useArticleStore())
 
 useSeoMeta({
   title: `${getArticle.title}`,
@@ -69,13 +78,15 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-const router = useRouter();
+function getFirstPTagText(htmlString) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  const firstPTag = doc.querySelector('p');
+  return firstPTag ? firstPTag.textContent : '';
+}
 
-const moment = (await import('moment')).default
+const firstPText = getFirstPTagText(getArticle.bodyHTML)
 
-const { preserveState} = useAppStateStore()
-
-const { getArticle, getAllArticles } = storeToRefs(useArticleStore())
 
 const formatDate = (timestamp) => {
   return moment(timestamp).fromNow()
@@ -88,12 +99,7 @@ const goBack = async () => {
   router.back();
 };
 
-function getFirstPTagText(htmlString) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
-  const firstPTag = doc.querySelector('p');
-  return firstPTag ? firstPTag.textContent : '';
-}
+
 
 
 const target = ref(null)
