@@ -78,13 +78,25 @@ function getFirstPTagText(htmlString) {
 
 const firstPText = getFirstPTagText(getArticle.bodyHTML)
 
-useSeoMeta({
+useHead({
   title: `${getArticle.title}`,
-  ogTitle: `${getArticle.title}`,
-  description: `${firstPText}`,
-  ogDescription: `${firstPText}`,
-  ogImage: `${getArticle.imageUrl}`,
-  twitterCard: 'summary_large_image',
+  meta: [
+    // Basic meta tags
+    { hid: 'description', name: 'description', content: firstPText },
+    //open graph
+  { hid: 'description', name: 'description', content:  firstPText },
+            { hid: 'og:title', property: 'og:title', content: getArticle.title },
+            { hid: 'og:description', property: 'og:description', content: firstPText },
+            { hid: 'og:image', property: 'og:image', content: getArticle.imageUrl},
+
+    // twitter card
+    { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
+        { name: 'twitter:site', content: '@_bfoley' },
+    { hid: "twitter:title", name: "twitter:title", content: getArticle.title },
+            { hid: 'twitter:description', name: 'twitter:description', content: firstPText },
+            { hid: "twitter:image", name: "twitter:image", content: getArticle.imageUrl},
+  ],
+  
 })
 
 const formatDate = (timestamp) => {
