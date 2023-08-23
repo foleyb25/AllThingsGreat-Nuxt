@@ -168,9 +168,9 @@ onBeforeUnmount(() => {
 });
 
 onMounted(() => {
-  description.value = getFirstPTagText(getArticle.bodyHTML);
-  pageTitle.value = getArticle.title;
-  pageImageUrl.value = getArticle.imageUrl;
+  description.value = getFirstPTagText(getArticle.value.bodyHTML);
+  pageTitle.value = getArticle.value.title;
+  pageImageUrl.value = getArticle.value.imageUrl;
 	loadTwitterWidget();
   loadInstagramWidget();
 });
