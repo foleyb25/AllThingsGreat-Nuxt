@@ -84,13 +84,12 @@ function getFirstPTagText(htmlString) {
 
 const firstPText = getFirstPTagText(getArticle.bodyHTML)
 
-useHead({
+useHead( () => ({
   title: `${pageTitle.value}`,
   meta: [
     // Basic meta tags
     { hid: 'description', name: 'description', content: description.value },
     //open graph
-  { hid: 'description', name: 'description', content:  description.value },
             { hid: 'og:title', property: 'og:title', content: pageTitle.value },
             { hid: 'og:description', property: 'og:description', content: description.value },
             { hid: 'og:image', property: 'og:image', content: pageImageUrl.value},
@@ -99,12 +98,11 @@ useHead({
     { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
         { name: 'twitter:site', content: '@_bfoley' },
     { hid: "twitter:title", name: "twitter:title", content: pageTitle.value },
-    { hid: "twitter:text:title", name: "twitter:text:title", content: pageTitle.value },
             { hid: 'twitter:description', name: 'twitter:description', content: description.value },
             { hid: "twitter:image", name: "twitter:image", content: pageImageUrl.value},
   ],
   
-})
+}))
 
 const formatDate = (timestamp) => {
   return moment(timestamp).fromNow()
