@@ -53,9 +53,20 @@ import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, onUpdated } from 'vue';
 
+const firstPText = getFirstPTagText(getArticle.bodyHTML)
+
 definePageMeta({
   //retrieves single article
   middleware: ['article']
+})
+
+useSeoMeta({
+  title: `${getArticle.title}`,
+  ogTitle: `${getArticle.title}`,
+  description: `${firstPText}`,
+  ogDescription: `${firstPText}`,
+  ogImage: `${getArticle.imageUrl}`,
+  twitterCard: 'summary_large_image',
 })
 
 const router = useRouter();
@@ -76,6 +87,14 @@ const goBack = async () => {
   }
   router.back();
 };
+
+function getFirstPTagText(htmlString) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+  const firstPTag = doc.querySelector('p');
+  return firstPTag ? firstPTag.textContent : '';
+}
+
 
 const target = ref(null)
 
