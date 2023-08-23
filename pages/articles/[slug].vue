@@ -99,6 +99,7 @@ useHead({
     { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
         { name: 'twitter:site', content: '@_bfoley' },
     { hid: "twitter:title", name: "twitter:title", content: pageTitle.value },
+    { hid: "twitter:text:title", name: "twitter:text:title", content: pageTitle.value },
             { hid: 'twitter:description', name: 'twitter:description', content: description.value },
             { hid: "twitter:image", name: "twitter:image", content: pageImageUrl.value},
   ],
