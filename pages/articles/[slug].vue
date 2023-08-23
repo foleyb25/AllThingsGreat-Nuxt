@@ -53,7 +53,7 @@ import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, onUpdated } from 'vue';
 
-
+const description = ref(''); // This will hold the description
 
 definePageMeta({
   //retrieves single article
@@ -70,6 +70,9 @@ const { preserveState} = useAppStateStore()
 const { getArticle, getAllArticles } = storeToRefs(useArticleStore())
 
 function getFirstPTagText(htmlString) {
+  if (typeof window === 'undefined') {
+    return ''; // or some default value for server side
+  }
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, 'text/html');
   const firstPTag = doc.querySelector('p');
@@ -82,18 +85,18 @@ useHead({
   title: `${getArticle.title}`,
   meta: [
     // Basic meta tags
-    { hid: 'description', name: 'description', content: firstPText },
+    { hid: 'description', name: 'description', content: description },
     //open graph
-  { hid: 'description', name: 'description', content:  firstPText },
+  { hid: 'description', name: 'description', content:  description },
             { hid: 'og:title', property: 'og:title', content: getArticle.title },
-            { hid: 'og:description', property: 'og:description', content: firstPText },
+            { hid: 'og:description', property: 'og:description', content: description },
             { hid: 'og:image', property: 'og:image', content: getArticle.imageUrl},
 
     // twitter card
     { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
         { name: 'twitter:site', content: '@_bfoley' },
     { hid: "twitter:title", name: "twitter:title", content: getArticle.title },
-            { hid: 'twitter:description', name: 'twitter:description', content: firstPText },
+            { hid: 'twitter:description', name: 'twitter:description', content: description },
             { hid: "twitter:image", name: "twitter:image", content: getArticle.imageUrl},
   ],
   
@@ -163,6 +166,7 @@ onBeforeUnmount(() => {
 });
 
 onMounted(() => {
+  description.value = getFirstPTagText(getArticle.bodyHTML);
 	loadTwitterWidget();
   loadInstagramWidget();
 });
