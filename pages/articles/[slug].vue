@@ -170,8 +170,8 @@ onBeforeUnmount(() => {
 
 onMounted(() => {
   description.value = getFirstPTagText(getArticle.bodyHTML);
-  const pageTitle = getArticle.title;
-const pageImageUrl = getArticle.imageUrl;
+  pageTitle.value = getArticle.title;
+  pageImageUrl.value = getArticle.imageUrl;
 	loadTwitterWidget();
   loadInstagramWidget();
 });
