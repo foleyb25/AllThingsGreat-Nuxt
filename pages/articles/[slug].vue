@@ -69,15 +69,6 @@ const { preserveState} = useAppStateStore()
 
 const { getArticle, getAllArticles } = storeToRefs(useArticleStore())
 
-useSeoMeta({
-  title: `${getArticle.title}`,
-  ogTitle: `${getArticle.title}`,
-  description: `${firstPText}`,
-  ogDescription: `${firstPText}`,
-  ogImage: `${getArticle.imageUrl}`,
-  twitterCard: 'summary_large_image',
-})
-
 function getFirstPTagText(htmlString) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, 'text/html');
@@ -87,6 +78,14 @@ function getFirstPTagText(htmlString) {
 
 const firstPText = getFirstPTagText(getArticle.bodyHTML)
 
+useSeoMeta({
+  title: `${getArticle.title}`,
+  ogTitle: `${getArticle.title}`,
+  description: `${firstPText}`,
+  ogDescription: `${firstPText}`,
+  ogImage: `${getArticle.imageUrl}`,
+  twitterCard: 'summary_large_image',
+})
 
 const formatDate = (timestamp) => {
   return moment(timestamp).fromNow()
