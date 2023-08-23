@@ -85,22 +85,22 @@ function getFirstPTagText(htmlString) {
 const firstPText = getFirstPTagText(getArticle.bodyHTML)
 
 useHead({
-  title: `${pageTitle}`,
+  title: `${pageTitle.value}`,
   meta: [
     // Basic meta tags
-    { hid: 'description', name: 'description', content: description },
+    { hid: 'description', name: 'description', content: description.value },
     //open graph
-  { hid: 'description', name: 'description', content:  description },
-            { hid: 'og:title', property: 'og:title', content: pageTitle },
-            { hid: 'og:description', property: 'og:description', content: description },
-            { hid: 'og:image', property: 'og:image', content: pageImageUrl},
+  { hid: 'description', name: 'description', content:  description.value },
+            { hid: 'og:title', property: 'og:title', content: pageTitle.value },
+            { hid: 'og:description', property: 'og:description', content: description.value },
+            { hid: 'og:image', property: 'og:image', content: pageImageUrl.value},
 
     // twitter card
     { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
         { name: 'twitter:site', content: '@_bfoley' },
-    { hid: "twitter:title", name: "twitter:title", content: pageTitle },
-            { hid: 'twitter:description', name: 'twitter:description', content: description },
-            { hid: "twitter:image", name: "twitter:image", content: pageImageUrl},
+    { hid: "twitter:title", name: "twitter:title", content: pageTitle.value },
+            { hid: 'twitter:description', name: 'twitter:description', content: description.value },
+            { hid: "twitter:image", name: "twitter:image", content: pageImageUrl.value},
   ],
   
 })
