@@ -54,6 +54,9 @@ import { storeToRefs } from 'pinia';
 import { ref, onMounted, onUpdated } from 'vue';
 
 const description = ref(''); // This will hold the description
+const pageTitle = ref('');
+const pageImageUrl = ref('');
+
 
 definePageMeta({
   //retrieves single article
@@ -82,22 +85,22 @@ function getFirstPTagText(htmlString) {
 const firstPText = getFirstPTagText(getArticle.bodyHTML)
 
 useHead({
-  title: `${getArticle.title}`,
+  title: `${pageTitle}`,
   meta: [
     // Basic meta tags
     { hid: 'description', name: 'description', content: description },
     //open graph
   { hid: 'description', name: 'description', content:  description },
-            { hid: 'og:title', property: 'og:title', content: getArticle.title },
+            { hid: 'og:title', property: 'og:title', content: pageTitle },
             { hid: 'og:description', property: 'og:description', content: description },
-            { hid: 'og:image', property: 'og:image', content: getArticle.imageUrl},
+            { hid: 'og:image', property: 'og:image', content: pageImageUrl},
 
     // twitter card
     { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
         { name: 'twitter:site', content: '@_bfoley' },
-    { hid: "twitter:title", name: "twitter:title", content: getArticle.title },
+    { hid: "twitter:title", name: "twitter:title", content: pageTitle },
             { hid: 'twitter:description', name: 'twitter:description', content: description },
-            { hid: "twitter:image", name: "twitter:image", content: getArticle.imageUrl},
+            { hid: "twitter:image", name: "twitter:image", content: pageImageUrl},
   ],
   
 })
@@ -167,6 +170,8 @@ onBeforeUnmount(() => {
 
 onMounted(() => {
   description.value = getFirstPTagText(getArticle.bodyHTML);
+  const pageTitle = getArticle.title;
+const pageImageUrl = getArticle.imageUrl;
 	loadTwitterWidget();
   loadInstagramWidget();
 });
