@@ -57,10 +57,31 @@ const description = ref(''); // This will hold the description
 const pageTitle = ref('');
 const pageImageUrl = ref('');
 
-
 definePageMeta({
   //retrieves single article
-  middleware: ['article']
+  middleware: ['article'],
+  title: `${pageTitle.value}`,
+  meta: [
+    // Basic meta tags
+    { hid: 'description', name: 'description', content: description.value },
+    //open graph
+
+    // twitter card
+    { hid: "twitter:title", name: "twitter:title", content: pageTitle.value },
+    { hid: 'twitter:description', name: 'twitter:description', content: description.value },
+    { hid: "twitter:image", name: "twitter:image", content: pageImageUrl.value},
+    { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
+    // { name: 'twitter:site', content: '@_bfoley' },
+    // { name: 'twitter:creator', content: '@_bfoley' },
+    
+            
+    { hid: 'og:title', property: 'og:title', content: pageTitle.value },
+    { hid: 'og:type', property: 'og:type', content: 'website' },
+    { hid: 'og:url', property: 'og:url', content: 'https://allthingsgreat.com' },
+    { hid: 'og:description', property: 'og:description', content: description.value },
+    { hid: 'og:image', property: 'og:image', content: pageImageUrl.value},
+
+]
 })
 
 
@@ -84,31 +105,6 @@ function getFirstPTagText(htmlString) {
 
 const firstPText = getFirstPTagText(getArticle.bodyHTML)
 
-useHead( () => ({
-  title: `${pageTitle.value}`,
-  meta: [
-    // Basic meta tags
-    { hid: 'description', name: 'description', content: description.value },
-    //open graph
-
-    // twitter card
-    { hid: "twitter:title", name: "twitter:title", content: pageTitle.value },
-    { hid: 'twitter:description', name: 'twitter:description', content: description.value },
-    { hid: "twitter:image", name: "twitter:image", content: pageImageUrl.value},
-    { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
-    // { name: 'twitter:site', content: '@_bfoley' },
-    // { name: 'twitter:creator', content: '@_bfoley' },
-    
-            
-    { hid: 'og:title', property: 'og:title', content: pageTitle.value },
-    { hid: 'og:type', property: 'og:type', content: 'website' },
-    { hid: 'og:url', property: 'og:url', content: 'https://allthingsgreat.com' },
-    { hid: 'og:description', property: 'og:description', content: description.value },
-    { hid: 'og:image', property: 'og:image', content: pageImageUrl.value},
-  ],
-  
-}))
-
 const formatDate = (timestamp) => {
   return moment(timestamp).fromNow()
 }
@@ -119,9 +115,6 @@ const goBack = async () => {
   }
   router.back();
 };
-
-
-
 
 const target = ref(null)
 
@@ -167,15 +160,15 @@ async function typewriter() {
 
 // Clear the timeout when the component is unmounted
 onBeforeUnmount(() => {
+  description.value = getFirstPTagText(getArticle.value.bodyHTML);
+  pageTitle.value = getArticle.value.title;
+  pageImageUrl.value = getArticle.value.imageUrl;
   if (timer.value) {
     clearTimeout(timer.value);
   }
 });
 
 onMounted(() => {
-  description.value = getFirstPTagText(getArticle.value.bodyHTML);
-  pageTitle.value = getArticle.value.title;
-  pageImageUrl.value = getArticle.value.imageUrl;
 	loadTwitterWidget();
   loadInstagramWidget();
 });
