@@ -100,11 +100,11 @@ useHead( () => ({
     // { name: 'twitter:creator', content: '@_bfoley' },
     
             
-    { name: 'og:title', content: pageTitle.value },
-    { name: 'og:type', content: 'website' },
-    { name: 'og:url', content: 'https://allthingsgreat.com' },
-    { name: 'og:description', content: description.value },
-    { name: 'og:image', content: pageImageUrl.value},
+    { property: 'og:title', content: pageTitle.value },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://allthingsgreat.com' },
+    { property: 'og:description', content: description.value },
+    { property: 'og:image', content: pageImageUrl.value},
   ],
   
 }))
