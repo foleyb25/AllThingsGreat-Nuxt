@@ -88,23 +88,23 @@ useHead( () => ({
   title: `${pageTitle.value}`,
   meta: [
     // Basic meta tags
-    { hid: 'description', name: 'description', content: description.value },
+    {name: 'description', content: description.value },
     //open graph
 
     // twitter card
-    { hid: "twitter:title", name: "twitter:title", content: pageTitle.value },
-    { hid: 'twitter:description', name: 'twitter:description', content: description.value },
-    { hid: "twitter:image", name: "twitter:image", content: pageImageUrl.value},
+    { name: "twitter:title", content: pageTitle.value },
+    { name: 'twitter:description', content: description.value },
+    { name: "twitter:image", content: pageImageUrl.value},
     { name: 'twitter:card', content: 'summary_large_image' },  // or 'summary'
     // { name: 'twitter:site', content: '@_bfoley' },
     // { name: 'twitter:creator', content: '@_bfoley' },
     
             
-    { hid: 'og:title', property: 'og:title', content: pageTitle.value },
-    { hid: 'og:type', property: 'og:type', content: 'website' },
-    { hid: 'og:url', property: 'og:url', content: 'https://allthingsgreat.com' },
-    { hid: 'og:description', property: 'og:description', content: description.value },
-    { hid: 'og:image', property: 'og:image', content: pageImageUrl.value},
+    { name: 'og:title', content: pageTitle.value },
+    { name: 'og:type', content: 'website' },
+    { name: 'og:url', content: 'https://allthingsgreat.com' },
+    { name: 'og:description', content: description.value },
+    { name: 'og:image', content: pageImageUrl.value},
   ],
   
 }))
