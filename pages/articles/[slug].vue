@@ -53,11 +53,6 @@ import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, onUpdated } from 'vue';
 
-const description = ref(''); // This will hold the description
-const pageTitle = ref('');
-const pageImageUrl = ref('');
-
-
 definePageMeta({
   //retrieves single article
   middleware: ['article']
@@ -82,7 +77,11 @@ function getFirstPTagText(htmlString) {
   return firstPTag ? firstPTag.textContent : '';
 }
 
-const firstPText = getFirstPTagText(getArticle.bodyHTML)
+const firstPText = ref(getFirstPTagText(getArticle.value.bodyHTML))
+
+const description = ref(firstPText.value); // This will hold the description
+const pageTitle = ref(getArticle.title);
+const pageImageUrl = ref(getArticle.imageUrl);
 
 useHead( () => ({
   title: `${pageTitle.value}`,
@@ -167,9 +166,6 @@ async function typewriter() {
 
 // Clear the timeout when the component is unmounted
 onBeforeUnmount(() => {
-  description.value = getFirstPTagText(getArticle.value.bodyHTML);
-  pageTitle.value = getArticle.value.title;
-  pageImageUrl.value = getArticle.value.imageUrl;
   if (timer.value) {
     clearTimeout(timer.value);
   }
