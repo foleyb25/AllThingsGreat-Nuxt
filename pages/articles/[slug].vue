@@ -80,8 +80,8 @@ function getFirstPTagText(htmlString) {
 const firstPText = ref(getFirstPTagText(getArticle.value.bodyHTML))
 
 const description = ref(firstPText.value); // This will hold the description
-const pageTitle = ref(getArticle.title);
-const pageImageUrl = ref(getArticle.imageUrl);
+const pageTitle = ref(getArticle.value.title);
+const pageImageUrl = ref(getArticle.value.imageUrl);
 
 useHead( () => ({
   title: `${pageTitle.value}`,
