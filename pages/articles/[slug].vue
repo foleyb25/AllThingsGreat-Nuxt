@@ -236,7 +236,7 @@ const loadInstagramWidget = () => {
   }
 
   p {
-    @apply text-left m-1;
+    @apply text-left my-[1em] mx-2;
   }
 
   h1 {
