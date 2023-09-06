@@ -35,7 +35,7 @@
 import { useArticleStore } from '@/stores/article.store'
 import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
-import { onMounted, nextTick } from 'vue'
+import { onBeforeMount, nextTick } from 'vue'
 import gsap from "gsap";
 
 const route = useRoute()
@@ -45,7 +45,7 @@ const { getAllArticles, getHasMore, getIsLoading, getError } = storeToRefs(useAr
 const articleStoreGetter = storeToRefs(useArticleStore())
 const { getIsPreserveState} = storeToRefs(useAppStateStore())
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await nextTick()
   if (!getIsPreserveState.value) {
     await resetState()
