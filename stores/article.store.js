@@ -6,7 +6,7 @@ export const useArticleStore = defineStore('articleStore', {
     allArticles: [],
     article: null,
     pageNumber: 0,
-    hasMore: true,
+    hasMore: false,
     isLoading: false,
     isArticleLoading: false,
     error: null,
@@ -75,7 +75,7 @@ export const useArticleStore = defineStore('articleStore', {
     async resetState() {
         this.pageNumber = 0
         this.allArticles = []
-        this.hasMore = true;
+        this.hasMore = false;
         this.isLoading = false
         this.error = null;      
     },

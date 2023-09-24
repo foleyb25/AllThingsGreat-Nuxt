@@ -1,21 +1,16 @@
 <template>
   <div class="p-4 max-h-screen bg-gray-50 overflow-y-scroll shadow-2xl">
-    <div class="grid gap-4 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-      <transition-group :css="false" @enter="onEnter">
-        <div v-if="getAllArticles.length > 0" v-for="(article, index) in getAllArticles" :key="article._id" :data-index="index">
-          <NuxtLink :to="`/articles/${article.slug}`" class="flex justify-center items-center">
-            <ArticleComponent :article="article" class="font-sans aspect-[14/15] w-[90%] shadow-2xl"></ArticleComponent>
-          </NuxtLink>
-        </div>
-        <div v-else-if="!getIsLoading && !getError" class="flex justify-center items-center mt-4">
-                    <div>No Articles To Show For This Category</div>
-                </div>
-      </transition-group>
-    </div>
     <div v-if="getIsLoading" class="mt-8 flex justify-center items-center">
-      <SpinnerComponent/>
+      <SpinnerComponent />
     </div>
-    <div v-else-if="getError" class="mt-8 w-full flex justify-center items-center">
+    <div v-else-if="getAllArticles.length > 0">
+      <ArticleListComponent :articles="getAllArticles" />
+    </div>
+    <div v-else class="flex justify-center items-center mt-4">
+      <div>No Articles To Show For This Category</div>
+    </div>
+
+    <div v-if="getError" class="mt-8 w-full flex justify-center items-center">
       <button v-if="getHasMore" @click="paginate"
         class="bg-[#111827] hover:bg-[#6b7280] text-white font-bold py-2 px-4 rounded">
         Retry
@@ -27,7 +22,7 @@
         Load More
       </button>
     </div>
-    
+
   </div>
 </template>
 
@@ -36,14 +31,11 @@ import { useArticleStore } from '@/stores/article.store'
 import { useAppStateStore } from '@/stores/appstate.store'
 import { storeToRefs } from 'pinia';
 import { onBeforeMount, nextTick } from 'vue'
-import gsap from "gsap";
 
-const route = useRoute()
-const { retrieveArticles, resetState} = useArticleStore()
-const {preserveState} = useAppStateStore()
+const { retrieveArticles, resetState } = useArticleStore()
+const { preserveState } = useAppStateStore()
 const { getAllArticles, getHasMore, getIsLoading, getError } = storeToRefs(useArticleStore())
-const articleStoreGetter = storeToRefs(useArticleStore())
-const { getIsPreserveState} = storeToRefs(useAppStateStore())
+const { getIsPreserveState } = storeToRefs(useAppStateStore())
 
 onBeforeMount(async () => {
   await nextTick()
@@ -58,24 +50,6 @@ onBeforeMount(async () => {
 const paginate = async () => {
   await retrieveArticles(undefined);
 }
-
-function onEnter(el, done) {
-  gsap.fromTo(
-    el,
-    {
-      opacity: 0.01,
-      scale: 0.01,
-    },
-    {
-      scale: 1,
-      opacity: 1,
-      delay: el.dataset.index * 0.15,
-      onComplete: done,
-    }
-  );
-}
-
-
 </script>
 
 

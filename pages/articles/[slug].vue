@@ -111,10 +111,14 @@ const formatDate = (timestamp) => {
 }
 
 const goBack = async () => {
-  if (getAllArticles.value.length > 0) {
-    await preserveState(true)
+  if (window.history.length <= 1) {
+    router.push('/');
+  } else {
+    if (getAllArticles.value.length > 0) {
+      await preserveState(true);
+    }
+    router.back();
   }
-  router.back();
 };
 
 
