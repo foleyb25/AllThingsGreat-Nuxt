@@ -81,16 +81,16 @@ const image5Params = {
   aText: ref([{ h1: 'Perfect is for the Urgent', p: 'and our mission is to offer you a dose of entertainment to spice up your 9-5 monotony.' }]),
 };
 
-const image6Params = {
-  h1_typedText: ref(''),
-  p_typedText: ref(''),
-  aText: ref([{ h1: 'So Next Time You\'re at Work,', p: 'and you need to take a shit...' }]),
-};
+// const image6Params = {
+//   h1_typedText: ref(''),
+//   p_typedText: ref(''),
+//   aText: ref([{ h1: 'So Next Time You\'re at Work,', p: 'and you need to take a shit...' }]),
+// };
 
 const image7Params = {
   h1_typedText: ref(''),
   p_typedText: ref(''),
-  aText: ref([{ h1: 'Open All Things Great', p: 'and find your happy place.' }]),
+  aText: ref([{ h1: 'So Open All Things Great', p: 'and find your happy place.' }]),
 };
 
 const scenes = [
@@ -129,13 +129,13 @@ const scenes = [
     params: image5Params,
     elementRef: ref(null)
   },
-  {
-    imageSrc: "80sneonarcade",
-    h1Class: "mt-96 ml-[10vw] text-2xl",
-    pClass: "m-2 ml-[10vw] text-base",
-    params: image6Params,
-    elementRef: ref(null)
-  },
+  // {
+  //   imageSrc: "80sneonarcade",
+  //   h1Class: "mt-96 ml-[10vw] text-2xl",
+  //   pClass: "m-2 ml-[10vw] text-base",
+  //   params: image6Params,
+  //   elementRef: ref(null)
+  // },
   {
     imageSrc: "80scitysunset",
     h1Class: "mt-96 ml-2 text-2xl",
